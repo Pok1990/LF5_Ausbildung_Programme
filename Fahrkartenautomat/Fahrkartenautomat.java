@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.text.*;
 
 // 2.6 Kommentare einfügen
+// 3.3 Ausgabe verändert. 
 
 class Fahrkartenautomat {
 	public static void main(String[] args) {
@@ -13,6 +15,9 @@ class Fahrkartenautomat {
 		double rueckgabebetrag;
 		double nochZuZahlen;
 
+		DecimalFormat format = new DecimalFormat("#0.00");
+
+
 		// Geldbetrag eingeben
 		System.out.print("Zu zahlender Betrag (Euro): ");
 		zuZahlenderBetrag = tastatur.nextDouble();
@@ -21,7 +26,7 @@ class Fahrkartenautomat {
 		nochZuZahlen = 0.0;
 		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
 			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-			System.out.println("Noch zu zahlen: " + nochZuZahlen);
+			System.out.println("Noch zu zahlen: " + format.format(nochZuZahlen));
 			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
 			eingeworfeneMuenze = tastatur.nextDouble();
 			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
@@ -43,7 +48,7 @@ class Fahrkartenautomat {
 		// Rückgeldberechnung uns -ausgabe
 		rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
 		if (rueckgabebetrag > 0.0) {
-			System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag + " Euro");
+			System.out.println("Der Rückgabebetrag in Höhe von " + format.format(rueckgabebetrag) + " Euro");
 			System.out.println("wird in folgenden Münzen ausgezahlt:");
 
 			while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
