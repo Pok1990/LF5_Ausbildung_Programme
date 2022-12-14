@@ -4,6 +4,7 @@ import java.text.*;
 // 2.6 Kommentare einfügen
 // 3.3 Ausgabe verändert. 
 // 3.4 Anzahl der Tickets hinzufügen
+// 3.5 Zusatz - Fehlerbeseitigung
 class Fahrkartenautomat {
 	public static void main(String[] args) {
 
@@ -63,19 +64,19 @@ class Fahrkartenautomat {
 				System.out.println("1 Euro");
 				rueckgabebetrag = rueckgabebetrag - 1.0;
 			}
-			while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
+			while (rueckgabebetrag >= 0.49999) { // 50-Cent-Münzen
 				System.out.println("50 Cent");
 				rueckgabebetrag = rueckgabebetrag - 0.5;
 			}
-			while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
+			while (rueckgabebetrag >= 0.19999) { // 20-Cent-Münzen
 				System.out.println("20 Cent");
 				rueckgabebetrag = rueckgabebetrag - 0.2;
 			}
-			while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
+			while (rueckgabebetrag >= 0.09999) { // 10-Cent-Münzen
 				System.out.println("10 Cent");
 				rueckgabebetrag = rueckgabebetrag - 0.1;
 			}
-			while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
+			while (rueckgabebetrag >= 0.04999) { // 5-Cent-Münzen
 				System.out.println("5 Cent");
 				rueckgabebetrag = rueckgabebetrag - 0.05;
 			}
