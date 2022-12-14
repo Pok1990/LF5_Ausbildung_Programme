@@ -3,7 +3,7 @@ import java.text.*;
 
 // 2.6 Kommentare einfügen
 // 3.3 Ausgabe verändert. 
-
+// 3.4 Anzahl der Tickets hinzufügen
 class Fahrkartenautomat {
 	public static void main(String[] args) {
 
@@ -13,17 +13,21 @@ class Fahrkartenautomat {
 		double eingezahlterGesamtbetrag;
 		double eingeworfeneMuenze;
 		double rueckgabebetrag;
-		double nochZuZahlen;
-
+		double nochZuZahlen = 0;
+		double ticketPreis = 2.50;
 		DecimalFormat format = new DecimalFormat("#0.00");
+		int ticketAnzahl = 1;	
+		// Ticketpreis vom User bekommen
+		//
+		System.out.print("Ticketpreis (Euro): ");
+		ticketPreis = tastatur.nextDouble();
 
+		System.out.print("Anzahl der Tickets: ");
+		ticketAnzahl = tastatur.nextInt();
 
-		// Geldbetrag eingeben
-		System.out.print("Zu zahlender Betrag (Euro): ");
-		zuZahlenderBetrag = tastatur.nextDouble();
+		zuZahlenderBetrag = ticketPreis * ticketAnzahl;
 		// Geldeinwurf
 		eingezahlterGesamtbetrag = 0.0;
-		nochZuZahlen = 0.0;
 		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
 			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
 			System.out.println("Noch zu zahlen: " + format.format(nochZuZahlen));
