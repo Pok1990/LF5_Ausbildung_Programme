@@ -5,6 +5,7 @@ import java.text.*;
 // 3.3 Ausgabe verändert. 
 // 3.4 Anzahl der Tickets hinzufügen
 // 3.5 Zusatz - Fehlerbeseitigung
+// 4.4 Ticketgrenzen im Fahrkartenautomaten
 class Fahrkartenautomat {
 	public static void main(String[] args) {
 
@@ -18,15 +19,23 @@ class Fahrkartenautomat {
 		double ticketPreis = 2.50;
 		DecimalFormat format = new DecimalFormat("#0.00");
 		int ticketAnzahl = 1;	
-		// Ticketpreis vom User bekommen
-		//
+		
+		// Eingabe von Ticketpreis und Ticketanzahl - mit zusätzlicher Eingabekontrolle (zwischen 1 und 10)
 		System.out.print("Ticketpreis (Euro): ");
 		ticketPreis = tastatur.nextDouble();
-
+		if (ticketPreis < 1 || ticketPreis > 10 ){
+			ticketPreis = 1;	
+			System.out.println("Fehlerhafte Eingabe - Ticketpreis wird auf 1 gesetzt");
+		}
 		System.out.print("Anzahl der Tickets: ");
 		ticketAnzahl = tastatur.nextInt();
-
+		if (ticketAnzahl < 1 || ticketAnzahl > 10 ){
+			ticketAnzahl = 1;	
+			System.out.println("Fehlerhafte Eingabe - Ticketpreis wird auf 1 gesetzt");
+		}
+		// -----------------------------------------------------------------------------------
 		zuZahlenderBetrag = ticketPreis * ticketAnzahl;
+		
 		// Geldeinwurf
 		eingezahlterGesamtbetrag = 0.0;
 		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
