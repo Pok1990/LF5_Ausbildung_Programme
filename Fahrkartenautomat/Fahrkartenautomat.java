@@ -6,6 +6,7 @@ import java.text.*;
 // 3.4 Anzahl der Tickets hinzufügen
 // 3.5 Zusatz - Fehlerbeseitigung
 // 4.4 Ticketgrenzen im Fahrkartenautomaten
+// 4.6 Geldeingabe Überprüfen
 class Fahrkartenautomat {
 	public static void main(String[] args) {
 
@@ -19,7 +20,7 @@ class Fahrkartenautomat {
 		double ticketPreis = 2.50;
 		DecimalFormat format = new DecimalFormat("#0.00");
 		int ticketAnzahl = 1;	
-		
+		int  gueltigesgeld = 0;
 		// Eingabe von Ticketpreis und Ticketanzahl - mit zusätzlicher Eingabekontrolle (zwischen 1 und 10)
 		System.out.print("Ticketpreis (Euro): ");
 		ticketPreis = tastatur.nextDouble();
@@ -39,10 +40,28 @@ class Fahrkartenautomat {
 		// Geldeinwurf
 		eingezahlterGesamtbetrag = 0.0;
 		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
+			gueltigesgeld = 0;
 			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
 			System.out.println("Noch zu zahlen: " + format.format(nochZuZahlen));
 			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
 			eingeworfeneMuenze = tastatur.nextDouble();
+			gueltigesgeld =  (int)(eingeworfeneMuenze * 100);
+			switch (gueltigesgeld){
+				case 5:
+				case 10:
+				case 20:
+				case 50:
+				case 100:
+				case 200 :
+				case 500:
+				case 1000:
+				case 2000:
+					break;
+				default:
+					System.out.println(">> kein Gültiges Zahlungsmittel");
+					continue;
+			}
+			
 			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
 		}
 		
