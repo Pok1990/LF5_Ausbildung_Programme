@@ -38,7 +38,5 @@ public class Fahrplan {
 		default: 
 			System.out.println("Fehler im Zielcomputer - wir fahren ins Nichts!!!");	
 	}
-
-        // Hier das Programm weiterschreiben
     }
 }
