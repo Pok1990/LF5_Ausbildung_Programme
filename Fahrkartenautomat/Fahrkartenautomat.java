@@ -24,7 +24,7 @@ class Fahrkartenautomat {
 		// Eingabe von Ticketpreis und Ticketanzahl - mit zusätzlicher Eingabekontrolle (zwischen 1 und 10)
 		System.out.print("Ticketpreis (Euro): ");
 		ticketPreis = tastatur.nextDouble();
-		if (ticketPreis < 1 || ticketPreis > 10 ){
+		if (ticketPreis <= 0 || ticketPreis > 10 ){
 			ticketPreis = 1;	
 			System.out.println("Fehlerhafte Eingabe - Ticketpreis wird auf 1 gesetzt");
 		}
@@ -32,7 +32,7 @@ class Fahrkartenautomat {
 		ticketAnzahl = tastatur.nextInt();
 		if (ticketAnzahl < 1 || ticketAnzahl > 10 ){
 			ticketAnzahl = 1;	
-			System.out.println("Fehlerhafte Eingabe - Ticketpreis wird auf 1 gesetzt");
+			System.out.println("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
 		}
 		// -----------------------------------------------------------------------------------
 		zuZahlenderBetrag = ticketPreis * ticketAnzahl;
