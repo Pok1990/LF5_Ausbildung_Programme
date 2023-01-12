@@ -17,11 +17,15 @@ class Fahrkartenautomat {
 		double eingeworfeneMuenze;
 		double rueckgabebetrag;
 		double nochZuZahlen = 0;
-		double ticketPreis = 2.50;
+		double ticketPreis = 0;
 		DecimalFormat format = new DecimalFormat("#0.00");
 		int ticketAnzahl = 2;	
 		int ticketwahl = 0;
-		int  gueltigesgeld = 0;
+		int gueltigesgeld = 0;
+		int anzahlkurzab = 0;
+		int anzahleinzelab = 0;
+		int anzahltagesab = 0;
+		int anzahlvierfahrtenab = 0;
 		// Eingabe von Ticketpreis und Ticketanzahl - mit zusätzlicher Eingabekontrolle (zwischen 1 und 10)
 		do{
 			if (ticketwahl == 0){
@@ -31,6 +35,7 @@ class Fahrkartenautomat {
 				System.out.println("  Tageskarte AB [8,00 EUR] (3)");
 				System.out.println("  4-Fahrten-Karte AB [9,40 EUR] (4)\n");
 				System.out.println("  Übersicht über Fahrkarten (0)\n");
+				System.out.println("  Bezahlen(9)\n");
 			}
 			if (ticketwahl != 0 && (ticketwahl < 0 || ticketwahl > 4)){
 				System.out.println(" >> Falsche Eingabe <<");
@@ -38,34 +43,50 @@ class Fahrkartenautomat {
 			}	
 			System.out.print("Ihre Wahl: ");
 			ticketwahl = tastatur.nextInt();
-		}while(ticketwahl <= 0 || ticketwahl > 4 );
-		switch (ticketwahl){
-			case 1:
-				ticketPreis = 2.00; 
-				break;
-			case 2:
-				ticketPreis = 3.00; 
-				break;
-			case 3:
-				ticketPreis = 8.00; 
-				break;
-			case 4:
-				ticketPreis = 9.40; 
-				break;
-			default:
-				System.out.println("Error, Eingabe fehlerhaft Abbruch");
-				System.exit(0);
-				break;	
-		}
-		
+
+			switch (ticketwahl){
+				case 1:
+					ticketPreis += 2.00;
+					anzahlkurzab++;
+					System.out.printf("Anzahl der Tickets %d von Kurzstrecke AB\n\n", anzahlkurzab);
+					System.out.printf("Zwischensumme: %.2f €\n", ticketPreis);
+					break;
+				case 2:
+					ticketPreis += 3.00; 
+					anzahleinzelab++;
+					System.out.printf("Anzahl der Tickets %d von Einzelfahrschein AB\n\n",anzahleinzelab );
+					System.out.printf("Zwischensumme: %.2f €\n", ticketPreis);
+					break;
+				case 3:
+					ticketPreis += 8.00; 
+					anzahltagesab++;
+					System.out.printf("Anzahl der Tickets %d von Tageskarte AB\n\n",anzahltagesab );
+					System.out.printf("Zwischensumme: %.2f €\n", ticketPreis);
+				       	break;
+				case 4:
+					ticketPreis += 9.40; 
+					anzahlvierfahrtenab++;
+					System.out.printf("Anzahl der Tickets %d von 4-Fahrten-Karte AB\n\n",anzahlvierfahrtenab );
+					System.out.printf("Zwischensumme: %.2f €\n", ticketPreis);
+					break;
+				default:
+					if (ticketwahl != 9){
+						// mögliche Falsche Bedienung
+						System.out.println("Diese Option steht ihnen nicht zur verfügung! bitte versuchen sie er erneut");
+					} 
+					break;	
+			}
+		}while(ticketwahl != 9 );
+	/**	
 		do {
 			// Frage solange nacht der Anzahl der Georderten Tickets, biss eine Zahl zwischen 1 und 10 eingegben wird.
 			if (ticketAnzahl < 1 || ticketAnzahl > 10)System.out.println(" >> Wählen sie bitte eine Anzahl von 1 bis 10 Tickets aus. <<\n");
 			System.out.print("Anzahl der Tickets: ");		
 			ticketAnzahl = tastatur.nextInt();
 		}while (ticketAnzahl < 1 || ticketAnzahl > 10);
+	**/
 		// -----------------------------------------------------------------------------------
-		zuZahlenderBetrag = ticketPreis * ticketAnzahl;
+		zuZahlenderBetrag = ticketPreis;
 		
 		// Geldeinwurf
 		eingezahlterGesamtbetrag = 0.0;
