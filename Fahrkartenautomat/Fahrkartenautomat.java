@@ -19,21 +19,23 @@ class Fahrkartenautomat {
 		double nochZuZahlen = 0;
 		double ticketPreis = 2.50;
 		DecimalFormat format = new DecimalFormat("#0.00");
-		int ticketAnzahl = 1;	
+		int ticketAnzahl = 2;	
 		int  gueltigesgeld = 0;
 		// Eingabe von Ticketpreis und Ticketanzahl - mit zusätzlicher Eingabekontrolle (zwischen 1 und 10)
+
 		System.out.print("Ticketpreis (Euro): ");
 		ticketPreis = tastatur.nextDouble();
 		if (ticketPreis <= 0 || ticketPreis > 10 ){
 			ticketPreis = 1;	
 			System.out.println("Fehlerhafte Eingabe - Ticketpreis wird auf 1 gesetzt");
 		}
-		System.out.print("Anzahl der Tickets: ");
-		ticketAnzahl = tastatur.nextInt();
-		if (ticketAnzahl < 1 || ticketAnzahl > 10 ){
-			ticketAnzahl = 1;	
-			System.out.println("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
-		}
+		
+		do {
+			// Frage solange nacht der Anzahl der Georderten Tickets, biss eine Zahl zwischen 1 und 10 eingegben wird.
+			if (ticketAnzahl < 1 || ticketAnzahl > 10)System.out.println(" >> Wählen sie bitte eine Anzahl von 1 bis 10 Tickets aus. <<\n");
+			System.out.print("Anzahl der Tickets: ");		
+			ticketAnzahl = tastatur.nextInt();
+		}while (ticketAnzahl < 1 || ticketAnzahl > 10);
 		// -----------------------------------------------------------------------------------
 		zuZahlenderBetrag = ticketPreis * ticketAnzahl;
 		
@@ -43,7 +45,7 @@ class Fahrkartenautomat {
 			gueltigesgeld = 0;
 			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
 			System.out.println("Noch zu zahlen: " + format.format(nochZuZahlen));
-			System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
+			System.out.print("Eingabe (mind. 5 Cent, höchstens 20 Euro): ");
 			eingeworfeneMuenze = tastatur.nextDouble();
 			gueltigesgeld =  (int)(eingeworfeneMuenze * 100);
 			switch (gueltigesgeld){
