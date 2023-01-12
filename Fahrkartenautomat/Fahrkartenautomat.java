@@ -82,7 +82,7 @@ class Fahrkartenautomat {
 				case 20:
 				case 50:
 				case 100:
-				case 200 :
+				case 200:
 				case 500:
 				case 1000:
 				case 2000:
@@ -100,7 +100,7 @@ class Fahrkartenautomat {
 		for (int i = 0; i < 8; i++) {
 			System.out.print("=");
 			try {
-				Thread.sleep(200);
+				Thread.sleep(100);
 			} 
 			catch (InterruptedException e) {
 				e.printStackTrace();
