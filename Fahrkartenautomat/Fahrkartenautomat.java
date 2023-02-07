@@ -13,28 +13,15 @@ class Fahrkartenautomat {
 		System.out.println("Herzlich Willkommen!\n");
 	}
 
-	public static void main(String[] args) {
+	public static double fahrkartenbestellungErfassen(Scanner tastatur){
 		
-		Scanner tastatur = new Scanner(System.in);
-
-		double zuZahlenderBetrag;
-		double eingezahlterGesamtbetrag;
-		double eingeworfeneMuenze;
-		double rueckgabebetrag;
-		double nochZuZahlen = 0;
 		double ticketPreis = 0;
-		DecimalFormat format = new DecimalFormat("#0.00");
-		int ticketAnzahl = 2;	
-		int ticketwahl = 0;
-		int gueltigesgeld = 0;
 		int anzahlkurzab = 0;
 		int anzahleinzelab = 0;
 		int anzahltagesab = 0;
 		int anzahlvierfahrtenab = 0;
-		
-		begruessung();
+		int ticketwahl = 0;
 
-		// Eingabe von Ticketpreis und Ticketanzahl - mit zusätzlicher Eingabekontrolle (zwischen 1 und 10)
 		do{
 			if (ticketwahl == 0){
 				System.out.println("Wählen die Ihre Wunschfahrkarte für Berlin AB aus:");
@@ -85,16 +72,25 @@ class Fahrkartenautomat {
 					break;	
 			}
 		}while(ticketwahl != 9 );
-	/**	
-		do {
-			// Frage solange nacht der Anzahl der Georderten Tickets, biss eine Zahl zwischen 1 und 10 eingegben wird.
-			if (ticketAnzahl < 1 || ticketAnzahl > 10)System.out.println(" >> Wählen sie bitte eine Anzahl von 1 bis 10 Tickets aus. <<\n");
-			System.out.print("Anzahl der Tickets: ");		
-			ticketAnzahl = tastatur.nextInt();
-		}while (ticketAnzahl < 1 || ticketAnzahl > 10);
-	**/
-		// -----------------------------------------------------------------------------------
-		zuZahlenderBetrag = ticketPreis;
+
+		return ticketPreis;
+	}
+
+	public static void main(String[] args) {
+		
+		Scanner tastatur = new Scanner(System.in);
+
+		double zuZahlenderBetrag;
+		double eingezahlterGesamtbetrag;
+		double eingeworfeneMuenze;
+		double rueckgabebetrag;
+		double nochZuZahlen = 0;
+		DecimalFormat format = new DecimalFormat("#0.00");
+		int gueltigesgeld = 0;
+		
+		begruessung();
+		
+		zuZahlenderBetrag = fahrkartenbestellungErfassen(tastatur);
 		
 		// Geldeinwurf
 		eingezahlterGesamtbetrag = 0.0;
