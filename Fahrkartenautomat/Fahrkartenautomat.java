@@ -8,8 +8,13 @@ import java.text.*;
 // 4.4 Ticketgrenzen im Fahrkartenautomaten
 // 4.6 Geldeingabe Überprüfen
 class Fahrkartenautomat {
-	public static void main(String[] args) {
 
+	public static void begruessung(){
+		System.out.println("Herzlich Willkommen!\n");
+	}
+
+	public static void main(String[] args) {
+		
 		Scanner tastatur = new Scanner(System.in);
 
 		double zuZahlenderBetrag;
@@ -26,6 +31,9 @@ class Fahrkartenautomat {
 		int anzahleinzelab = 0;
 		int anzahltagesab = 0;
 		int anzahlvierfahrtenab = 0;
+		
+		begruessung();
+
 		// Eingabe von Ticketpreis und Ticketanzahl - mit zusätzlicher Eingabekontrolle (zwischen 1 und 10)
 		do{
 			if (ticketwahl == 0){
