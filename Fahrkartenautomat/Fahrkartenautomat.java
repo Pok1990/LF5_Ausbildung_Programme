@@ -13,6 +13,42 @@ class Fahrkartenautomat {
 		System.out.println("Herzlich Willkommen!\n");
 	}
 
+	public static double fahrkartenBezahlen(Scanner tastatur, double zuZahlenderBetrag){
+		double eingezahlterGesamtbetrag = 0.0;
+		int gueltigesgeld = 0;
+		double eingeworfeneMuenze = 0.0;
+		double nochZuZahlen = 0;
+		DecimalFormat format = new DecimalFormat("#0.00");
+	
+		eingezahlterGesamtbetrag = 0.0;
+		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
+			gueltigesgeld = 0;
+			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
+			System.out.println("Noch zu zahlen: " + format.format(nochZuZahlen));
+			System.out.print("Eingabe (mind. 5 Cent, höchstens 20 Euro): ");
+			eingeworfeneMuenze = tastatur.nextDouble();
+			gueltigesgeld =  (int)(eingeworfeneMuenze * 100);
+			switch (gueltigesgeld){
+				case 5:
+				case 10:
+				case 20:
+				case 50:
+				case 100:
+				case 200:
+				case 500:
+				case 1000:
+				case 2000:
+					break;
+				default:
+					System.out.println(">> kein Gültiges Zahlungsmittel");
+					continue;
+			}
+			
+			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
+		}
+		return eingezahlterGesamtbetrag;
+	}
+
 	public static double fahrkartenbestellungErfassen(Scanner tastatur){
 		
 		double ticketPreis = 0;
@@ -82,43 +118,13 @@ class Fahrkartenautomat {
 
 		double zuZahlenderBetrag;
 		double eingezahlterGesamtbetrag;
-		double eingeworfeneMuenze;
 		double rueckgabebetrag;
-		double nochZuZahlen = 0;
 		DecimalFormat format = new DecimalFormat("#0.00");
-		int gueltigesgeld = 0;
 		
 		begruessung();
 		
 		zuZahlenderBetrag = fahrkartenbestellungErfassen(tastatur);
-		
-		// Geldeinwurf
-		eingezahlterGesamtbetrag = 0.0;
-		while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
-			gueltigesgeld = 0;
-			nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-			System.out.println("Noch zu zahlen: " + format.format(nochZuZahlen));
-			System.out.print("Eingabe (mind. 5 Cent, höchstens 20 Euro): ");
-			eingeworfeneMuenze = tastatur.nextDouble();
-			gueltigesgeld =  (int)(eingeworfeneMuenze * 100);
-			switch (gueltigesgeld){
-				case 5:
-				case 10:
-				case 20:
-				case 50:
-				case 100:
-				case 200:
-				case 500:
-				case 1000:
-				case 2000:
-					break;
-				default:
-					System.out.println(">> kein Gültiges Zahlungsmittel");
-					continue;
-			}
-			
-			eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
-		}
+		eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur,zuZahlenderBetrag);
 		
 		// Fahrscheinausgabe
 		System.out.println("\nFahrschein wird ausgegeben");
