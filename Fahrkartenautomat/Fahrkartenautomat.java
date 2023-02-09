@@ -9,6 +9,14 @@ import java.text.*;
 // 4.6 Geldeingabe Überprüfen
 class Fahrkartenautomat {
 
+	public static double muenzRueckgabe(double rueckgabe, double value, String stringvalue){
+		while (rueckgabe >= value) {
+			System.out.println(stringvalue);
+			rueckgabe = rueckgabe - value;
+		}
+		return rueckgabe;
+	}
+
 	public static void begruessung(){
 		System.out.println("Herzlich Willkommen!\n");
 	}
@@ -21,30 +29,12 @@ class Fahrkartenautomat {
 		if (rueckgabebetrag > 0.0) {
 			System.out.println("Der Rückgabebetrag in Höhe von " + format.format(rueckgabebetrag) + " Euro");
 			System.out.println("wird in folgenden Münzen ausgezahlt:");
-			while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
-				System.out.println("2 Euro");
-				rueckgabebetrag = rueckgabebetrag - 2.0;
-			}
-			while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
-				System.out.println("1 Euro");
-				rueckgabebetrag = rueckgabebetrag - 1.0;
-			}
-			while (rueckgabebetrag >= 0.49999) { // 50-Cent-Münzen
-				System.out.println("50 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.5;
-			}
-			while (rueckgabebetrag >= 0.19999) { // 20-Cent-Münzen
-				System.out.println("20 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.2;
-			}
-			while (rueckgabebetrag >= 0.09999) { // 10-Cent-Münzen
-				System.out.println("10 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.1;
-			}
-			while (rueckgabebetrag >= 0.04999) { // 5-Cent-Münzen
-				System.out.println("5 Cent");
-				rueckgabebetrag = rueckgabebetrag - 0.05;
-			}
+			rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 2.0, "2 Euro");
+			rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 1.0, "1 Euro");
+			rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 0.49999, "50 Cent");
+			rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 0.19999, "20 Cent");
+			rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 0.09999, "10 Cent");
+			rueckgabebetrag = muenzRueckgabe(rueckgabebetrag, 0.04999, " 5 Cent");
 		}
 		System.out.println("\nVergessen Sie nicht, den Fahrschein\n" + "vor Fahrtantritt entwerten zu lassen!\n"
 				+ "Wir wünschen Ihnen eine gute Fahrt.");
