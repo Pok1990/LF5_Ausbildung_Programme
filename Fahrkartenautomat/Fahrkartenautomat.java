@@ -12,7 +12,7 @@ class Fahrkartenautomat {
 	public static double muenzRueckgabe(double rueckgabe, double value, String stringvalue){
 		while (rueckgabe >= value) {
 			System.out.println(stringvalue);
-			rueckgabe = rueckgabe - value;
+			rueckgabe -= value;
 		}
 		return rueckgabe;
 	}
@@ -90,60 +90,61 @@ class Fahrkartenautomat {
 
 	public static double fahrkartenbestellungErfassen(Scanner tastatur){
 		double ticketPreis = 0;
-		int anzahlkurzab = 0;
-		int anzahleinzelab = 0;
-		int anzahltagesab = 0;
-		int anzahlvierfahrtenab = 0;
+		int ticketanzahl = 0;
 		int ticketwahl = 0;
+		
+		double[] ticketpreise = new double[14];
+		String[] Fahrkartennamen= new String[14];
+
+		ticketpreise[1] = 3.00;
+		Fahrkartennamen[1] = "Einzelfahrschein AB";
+		ticketpreise[2] = 3.50;
+		Fahrkartennamen[2] = "Einzelfahrschein BC";
+		ticketpreise[3] = 3.80;
+		Fahrkartennamen[3] = "Einzelfahrschein ABC";
+		ticketpreise[4] = 2.00;
+		Fahrkartennamen[4] = "Kurzstrecke AB";
+		ticketpreise[5] = 8.600;
+		Fahrkartennamen[5] = "Tageskarte AB";
+		ticketpreise[6] = 9.20;
+		Fahrkartennamen[6] = "Tageskarte BC";
+		ticketpreise[7] = 10.00;
+		Fahrkartennamen[7] = "Tageskarte ABC";
+		ticketpreise[8] = 9.40;
+		Fahrkartennamen[8] = "4-Fahrten-Karte AB";
+		ticketpreise[9] = 12.60;
+		Fahrkartennamen[9] = "4-Fahrten-Karte BC";
+		ticketpreise[10] = 13.80;
+		Fahrkartennamen[10] = "4-Fahrten-Karte ABC";
+		ticketpreise[11] = 25.50;
+		Fahrkartennamen[11] = "Kleingruppen-Tageskarte AB";
+		ticketpreise[12] = 26.00;
+		Fahrkartennamen[12] = "Kleingruppen-Tageskarte BC";
+		ticketpreise[13] = 26.50;
+		Fahrkartennamen[13] = "Kleingruppen-Tageskarte ABC";
+
 		do{
-			if (ticketwahl == 0){
-				System.out.println("Wählen die Ihre Wunschfahrkarte für Berlin AB aus:");
-				System.out.println("  Kurzstrecke AB [2,00 EUR] (1)");
-				System.out.println("  Einzelfahrschein AB [3,00 EUR] (2)");
-				System.out.println("  Tageskarte AB [8,00 EUR] (3)");
-				System.out.println("  4-Fahrten-Karte AB [9,40 EUR] (4)\n");
-				System.out.println("  Übersicht über Fahrkarten (0)\n");
-				System.out.println("  Bezahlen(9)\n");
+			System.out.println("Wählen die Ihre Wunschfahrkarte für Berlin aus:");
+			for (int i= 0;i < ticketpreise.length ; i++){
+				if (i == 0) continue;
+				System.out.printf(" [%d]\t %s mit [ %.2f EUR ] \n",i,Fahrkartennamen[i],ticketpreise[i]);
 			}
-			if (ticketwahl != 0 && (ticketwahl < 0 || ticketwahl > 4)){
-				System.out.println(" >> Falsche Eingabe <<");
-			}else{
-			}	
-			System.out.print("Ihre Wahl: ");
+			System.out.println(" [0]\t Bezahlen\n");
+
+			System.out.print("Ihre Auswahl: ");
 			ticketwahl = tastatur.nextInt();
-			switch (ticketwahl){
-				case 1:
-					ticketPreis += 2.00;
-					anzahlkurzab++;
-					System.out.printf("Anzahl der Tickets %d von Kurzstrecke AB\n\n", anzahlkurzab);
-					System.out.printf("Zwischensumme: %.2f €\n", ticketPreis);
-					break;
-				case 2:
-					ticketPreis += 3.00; 
-					anzahleinzelab++;
-					System.out.printf("Anzahl der Tickets %d von Einzelfahrschein AB\n\n",anzahleinzelab );
-					System.out.printf("Zwischensumme: %.2f €\n", ticketPreis);
-					break;
-				case 3:
-					ticketPreis += 8.00; 
-					anzahltagesab++;
-					System.out.printf("Anzahl der Tickets %d von Tageskarte AB\n\n",anzahltagesab );
-					System.out.printf("Zwischensumme: %.2f €\n", ticketPreis);
-				       	break;
-				case 4:
-					ticketPreis += 9.40; 
-					anzahlvierfahrtenab++;
-					System.out.printf("Anzahl der Tickets %d von 4-Fahrten-Karte AB\n\n",anzahlvierfahrtenab );
-					System.out.printf("Zwischensumme: %.2f €\n", ticketPreis);
-					break;
-				default:
-					if (ticketwahl != 9){
-						// mögliche Falsche Bedienung
-						System.out.println("Diese Option steht ihnen nicht zur verfügung! bitte versuchen sie er erneut");
-					} 
-					break;	
+			
+			if ( ticketwahl > 0 && ticketwahl <= ticketpreise.length-1 ){
+				ticketPreis += ticketpreise[ticketwahl];	
+				ticketanzahl++;
+				System.out.printf("Anzahl der Tickets: %d \n",ticketanzahl);
+				System.out.printf("Noch zu Zahlen: %.2f \n",ticketPreis);
+			}else{
+				if (ticketwahl == 0){ break; }
+				System.out.println("Ungültige Auswahl --> Try Again\n");		
 			}
-		}while(ticketwahl != 9 );
+
+		}while(ticketwahl != 0 );
 		return ticketPreis;
 	}
 
